@@ -1,9 +1,5 @@
 package routeplan;
 
-import java.util.List;
-
-import lbs.LocationService;
-
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
@@ -11,11 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
 import android.util.Log;
-
+import cn.smssdk.SMSSDK;
 import com.baidu.mapapi.SDKInitializer;
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
+import lbs.LocationService;
+
+import java.util.List;
 
 public class HelpApplication extends Application {
     public static final String APP_ID = "2882303761517274441";
@@ -34,6 +33,7 @@ public class HelpApplication extends Application {
 		if (shouldInit()) {
 			MiPushClient.registerPush(this, APP_ID, APP_KEY);
 		}
+		SMSSDK.initSDK(this, "4a0d041cc7be", "030ab5f5a5363e4fb03399bdea4b522d");
 		// ´ò¿ªLog
 		LoggerInterface newLogger = new LoggerInterface() {
 

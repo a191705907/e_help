@@ -1,14 +1,5 @@
 package client.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import otherlogin.AuthorizeActivity;
-import otherlogin.ThirdPartyManager;
-import routeplan.Location;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -18,17 +9,18 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
-
 import communicate.PushConfig;
 import communicate.PushSender;
+import org.json.JSONException;
+import org.json.JSONObject;
+import otherlogin.AuthorizeActivity;
+import otherlogin.ThirdPartyManager;
+import routeplan.Location;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends Activity implements OnClickListener{
 	private ImageView loginLogo,login_more;
@@ -50,7 +42,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
-		
+
 		loginLogo=(ImageView)this.findViewById(R.id.logo);
 		login_more=(ImageView)this.findViewById(R.id.login_more);
 		loginaccount=(EditText)this.findViewById(R.id.loginaccount);
@@ -210,6 +202,6 @@ public class LoginActivity extends Activity implements OnClickListener{
             super.onPostExecute(result);
         }
     }
-	
+
 	
 }

@@ -7,10 +7,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 import communicate.PushConfig;
 import communicate.PushSender;
 import org.json.JSONException;
@@ -22,27 +25,47 @@ import java.util.Map;
 public class RegisterActivity extends Activity implements OnClickListener{
 
 	private EditText userId,password,password1;
+	private TextView tv_phone;
 	private Button cancel,register;
 	private Map<String,Object> data=new HashMap<String,Object>();
 	private Regis regis;
-
+	private String country;
+	private String phone;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.register);
-		init();
-		
+		//打开注册页面
+		SMSSDK.initSDK(this, "4a0d041cc7be", "030ab5f5a5363e4fb03399bdea4b522d");
+		RegisterPage registerPage = new RegisterPage();
+		registerPage.setRegisterCallback(new EventHandler() {
+			public void afterEvent(int event, int result, Object data) {
+// 解析注册结果
+				if (result == SMSSDK.RESULT_COMPLETE) {
+					@SuppressWarnings("unchecked")
+					HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+					country = (String) phoneMap.get("country");
+					phone = (String) phoneMap.get("phone");
+					init();
+				}
+			}
+		});
+		registerPage.show(RegisterActivity.this);
+
 
 	}
-	
+
 	//初始化控件
 	private void init() {
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.register);
+
 		userId=(EditText)findViewById(R.id.user);
 		password=(EditText)findViewById(R.id.password);
 		password1=(EditText)findViewById(R.id.password2);
 		cancel=(Button)findViewById(R.id.cancel);
 		register=(Button)findViewById(R.id.register);
+		tv_phone = (TextView)findViewById(R.id.tv_phone);
+		tv_phone.setText(phone);
 		register.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -66,18 +89,21 @@ public class RegisterActivity extends Activity implements OnClickListener{
 	private class Regis extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected String doInBackground(Void... params) { 
-        	data.put("username",userId.getText().toString()); 
+        protected String doInBackground(Void... params) {
+        	data.put("username",phone);
+			data.put("nickname",userId.getText().toString());
             data.put("password",password.getText().toString());
             data.put("password1",password1.getText().toString());
             return PushSender.sendMessage("register",data);
+			//打开注册页面
+
         }
         @Override
-        protected void onPreExecute() {   
-        	
+        protected void onPreExecute() {
+
         }
         @Override
-        protected void onPostExecute(String result) {   	
+        protected void onPostExecute(String result) {
         	if(result.equals("network error")){
         		Toast.makeText(RegisterActivity.this,"您还没有联网", Toast.LENGTH_SHORT).show();
         	}

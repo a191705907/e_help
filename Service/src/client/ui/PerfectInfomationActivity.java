@@ -37,7 +37,7 @@ public class PerfectInfomationActivity extends Activity implements OnClickListen
 	private static final int PHOTO_REQUEST_CUT = 3;// 结果
 	// 创建一个以当前时间为名称的文件
 	private File tempFile = new File(Environment.getExternalStorageDirectory(), getPhotoFileName());
-	private EditText name,phone,idcard,sickness,age,email;
+	private EditText name,phone,idcard,sickness,age,email,address;
 	private Spinner career,usertype;
 	private Button cancel,register;
 	private RadioGroup gender;
@@ -66,6 +66,7 @@ public class PerfectInfomationActivity extends Activity implements OnClickListen
 		sickness=(EditText)findViewById(R.id.sickness);
 		email = (EditText)findViewById(R.id.email);
 		age=(EditText)findViewById(R.id.age);
+		address = (EditText)findViewById(R.id.address);
 //		password=(EditText)findViewById(R.id.password);
 //		password1=(EditText)findViewById(R.id.password2);
 		cancel=(Button)findViewById(R.id.cancel1);
@@ -235,6 +236,7 @@ public class PerfectInfomationActivity extends Activity implements OnClickListen
             data.put("cardid", idcard.getText().toString());
             data.put("realname",name.getText().toString());
 			data.put("email",email.getText().toString());
+			data.put("address",address.getText().toString());
             if(career.getSelectedItem().toString().equals("医务相关人员"))
             	data.put("vocation","1");
             else if(career.getSelectedItem().toString().equals("警察、消防等政府相关人员"))
