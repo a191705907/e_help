@@ -91,6 +91,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
         @Override
         protected String doInBackground(Void... params) {
         	data.put("username",phone);
+			data.put("phone",phone);
 			data.put("nickname",userId.getText().toString());
             data.put("password",password.getText().toString());
             data.put("password1",password1.getText().toString());

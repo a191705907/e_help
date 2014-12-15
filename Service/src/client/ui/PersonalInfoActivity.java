@@ -1,15 +1,5 @@
 package client.ui;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -26,15 +16,18 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import communicate.PushConfig;
 import communicate.PushSender;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonalInfoActivity extends Activity {
 	
@@ -467,7 +460,7 @@ public class PersonalInfoActivity extends Activity {
             try {
 				JSONObject jo=new JSONObject(result);
 				JSONObject info=jo.getJSONObject("result");
-				nameTV.setText(info.getString("realname"));
+				nameTV.setText(info.getString("nickname"));
 				if(info.getString("sex").equals("1"))
 					sexTV.setText("ÄÐ");
 				else

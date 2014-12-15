@@ -145,12 +145,12 @@ public class LoginActivity extends Activity implements OnClickListener{
 
         @Override
         protected String doInBackground(Void... params) { 
-//        	data.put("username",loginaccount.getText().toString().trim()); 
-//            data.put("password",loginpassword.getText().toString().trim());
+        	data.put("username",loginaccount.getText().toString().trim());
+            data.put("password",loginpassword.getText().toString().trim());
             
             //ÃâµÇÂ¼¼òÒ×°æ
-        	data.put("username","qwe".trim()); 
-            data.put("password","111111".trim());
+//        	data.put("username","qwe".trim());
+//            data.put("password","111111".trim());
             
             data.put("longitude", lo.Getlongtitude());
             data.put("latitude", lo.GetLatitude());
@@ -180,10 +180,10 @@ public class LoginActivity extends Activity implements OnClickListener{
             		break;
             	case 3:
             		Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦", Toast.LENGTH_SHORT).show();
-//            		PushConfig.username = loginaccount.getText().toString().trim();
+            		PushConfig.username = loginaccount.getText().toString().trim();
             		
             		//ÃâµÇÂ¼¼òÒ×°æ
-            		PushConfig.username = "qwe".trim();
+//            		PushConfig.username = "qwe".trim();
             		
             		PushSender.sendClientId();
     				startActivity(new Intent(LoginActivity.this,ControlActivity.class));
